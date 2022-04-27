@@ -5,6 +5,7 @@ var scaleNumber = 40;
 var answerBlockId = null;
 const MAX_VALUE = 255;
 var level = 0;
+var loss = false;
 
 var allBlocks = document.getElementsByClassName("block");
 
@@ -53,7 +54,7 @@ function getBlockWidth(rowBlockNumber) {
 
 // * main function
 function clicked(blockId) {
-    if (blockId == answerBlockId) {
+    if (blockId == answerBlockId && !loss) {
         //* for clearing the welcome words
         if (score === 0) {
             let temp = document.getElementsByClassName("welcome");
@@ -82,6 +83,11 @@ function clicked(blockId) {
                     visiblizeBlockNumber(blockNumber);
                     break;
 
+                case 4:
+                    blockNumber = 16;
+                    visiblizeBlockNumber(blockNumber);
+                    break;
+                
                 default:
                     break;
             }
@@ -92,6 +98,10 @@ function clicked(blockId) {
     }
     //* wrong answer
     // TODO : add animation, show correct answer, etc.
+    else{
+        alert("oops");
+        loss = true;
+    }
 }
 
 function refresh() {
