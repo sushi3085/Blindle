@@ -35,13 +35,12 @@ function toHex(d) {
 }
 
 function visiblizeBlockNumber(n) {
-    // TODO : calculate block width and height, write a function to do this.
     let width = getBlockWidth(Math.sqrt(n));
 
     for (let i = 0; i < n; i++) {
         allBlocks[i].style.display = "block";
-        allBlocks[i].style.width = width+"px";
-        allBlocks[i].style.height = width+"px";
+        allBlocks[i].style.width = width + "px";
+        allBlocks[i].style.height = width + "px";
     }
 }
 
@@ -53,7 +52,7 @@ function getBlockWidth(rowBlockNumber) {
 }
 
 // * main function
-function clicked(blockId) {
+async function clicked(blockId) {
     if (blockId == answerBlockId && !loss) {
         //* for clearing the welcome words
         if (score === 0) {
@@ -61,6 +60,8 @@ function clicked(blockId) {
             for (let i = 0; i < temp.length; i++) {
                 temp[i].style.visibility = "hidden";
             }
+            //* show credit
+            document.getElementsByClassName("btDiv")[0].style.visibility = "";
         }
 
         //* you won the game!
@@ -87,7 +88,7 @@ function clicked(blockId) {
                     blockNumber = 16;
                     visiblizeBlockNumber(blockNumber);
                     break;
-                
+
                 default:
                     break;
             }
@@ -97,9 +98,15 @@ function clicked(blockId) {
         return true;
     }
     //* wrong answer
-    // TODO : add animation, show correct answer, etc.
-    else{
-        alert("oops");
+    else {
+        // TODO : add animation, show correct answer, etc.
+        // TODO DONE
+        if (loss) return true;
+        await dimmingBlocks();
+        setTimeout(()=>{
+            alert("this can be practiced, \nnext round will be better.\n\nREFRESH THIS PAGE TO START NEXT ROUND");
+        }, 1000);
+        // alert("this can be practiced, \nnext round will be better.\n\nREFRESH THIS PAGE TO START NEXT ROUND");
         loss = true;
     }
 }
@@ -110,7 +117,7 @@ function refresh() {
         allBlocks[i].style.background = toHex(grayNumber);
     }
     let rand = randIntUntil(blockNumber);
-    allBlocks[rand].style.background = toHex(grayNumber + scaleNumber - (level+5) * 2);
+    allBlocks[rand].style.background = toHex(grayNumber + scaleNumber - (level + 5) * 2);
 
     //! set answerBlickId
     answerBlockId = rand;
@@ -118,6 +125,43 @@ function refresh() {
     //! add score, show score
     score++;
     document.getElementById("score").innerHTML = "" + score;
+}
+
+function dimmingBlocks() {
+    // var dim = function(id){
+
+    //     f = setInterval((id) => {
+    //         //! dim 10 % each time
+    //         allBlocks[id].style.opacity = `${(+allBlocks[id].style.opacity)+0.1}`;
+    //         // console.log(allBlocks[id]);
+    //     }, 100, id);
+    //     setTimeout(() => {
+    //         clearInterval(f);
+    //     }, 1000);
+    // };
+    // TODO : show neightbor blocks at the end of the game.
+    let rawNum = Math.sqrt(blockNumber);
+
+    let Ax = Math.floor(answerBlockId / rawNum);
+    let Ay = answerBlockId % rawNum;
+
+    for (let id = 0; id < blockNumber; id++) {
+        let x = Math.floor(id / rawNum);
+        let y = id % rawNum;
+
+        if (id == answerBlockId){
+            continue
+        }
+        if(y==Ay){
+            if(x+1 == Ax || x-1==Ax)
+                continue;
+        }
+        if(x==Ax){
+            if(y+1 == Ay || y-1==Ay)
+                continue;
+        }
+        allBlocks[id].classList.toggle('fade');
+    }
 }
 
 onStartInit();

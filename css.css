@@ -40,8 +40,31 @@ span{
     margin: 2px;
 
     border-radius: 2px 2px 2px 2px;
+
+    opacity: 1;
+    transition: opacity 1s;
+}
+.block.fade{
+    opacity: 0;
 }
 
 .welcome{
+    margin: auto;
+}
+
+.bt{
+    color: rgba(132, 221, 154, 0.644);
+    font-size: 12px;
+    margin: auto;
+    position: relative;
+    top: 0 !important;
+    bottom: -25%;
+    text-align: center;
+}
+
+.btDiv{
+    position: relative;
+    top: 25%;
+    flex: none;
     margin: auto;
 }
