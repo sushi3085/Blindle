@@ -1,1 +1,3 @@
 # Blindle
+
+## How to Play?
