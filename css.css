@@ -2,12 +2,45 @@ body{
     margin: 0 0 0 0;
 }
 
-
-.block{
-    background-color: #999999;
+.background{
+    background-color: #4d4b4b;
 }
 
 div{
     width: device-width;
-    height: device-height;
+    height: 100vh;
+}
+
+div>span{
+    color: #CCCCCC;
+    font-family: 'JetBrains Mono', monospace;
+    
+    font-size: 40px;
+    
+    position: relative;
+    top: 5%;
+}
+
+#board{
+    position: relative;
+    top: 15%;
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+
+    //
+}
+
+.block{
+    background-color: #999999;
+    width: calc(25% - 4px);
+    height: calc(80vw*0.25 - 4px);
+
+    margin: 2px;
+}
+.board>* {
+    flex: 1 1 160px;
+    margin: 10px;
 }
