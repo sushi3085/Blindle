@@ -1,0 +1,13 @@
+body{
+    margin: 0 0 0 0;
+}
+
+
+.block{
+    background-color: #999999;
+}
+
+div{
+    width: device-width;
+    height: device-height;
+}
