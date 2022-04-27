@@ -47,7 +47,7 @@ function visiblizeBlockNumber(n) {
 function getBlockWidth(rowBlockNumber) {
     let container = document.getElementById("board");
     let cWidth = container.clientWidth;
-    let width = cWidth / rowBlockNumber - 4;//! px
+    let width = cWidth / rowBlockNumber - 6;//! px
     return width;
 }
 

@@ -5,7 +5,7 @@ body{
 .background{
     background-color: #3d3c23;
     width: device-width;
-    height: 100vh;
+    height: 105vh;
 }
 
 
@@ -26,7 +26,7 @@ span{
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-    height: 50%;
+    height: 45%;
     margin: auto;
 
     align-content: flex-start;
@@ -54,11 +54,11 @@ span{
 
 .bt{
     color: rgba(132, 221, 154, 0.644);
-    font-size: 12px;
+    font-size: 8px;
     margin: auto;
     position: relative;
-    top: 0 !important;
-    bottom: -25%;
+    /* top: 0 !important;
+    bottom: -25%; */
     text-align: center;
 }
 
