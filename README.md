@@ -5,7 +5,7 @@ Just like other color distinguishing game, this game is a gray scale version.
 Which means you have to choose a answer color block in 2\*2, 3\*3 or 4\*4 block matrix.  
 And the answer will always be the 'lighter' one, just for clarifying, here is an example.
 
-[IMAGE HERE]
+![img](demo.JPG)
 
 So obviously, the answer is the answer.  
 Ready for enjoying your journey?  
