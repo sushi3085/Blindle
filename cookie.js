@@ -23,4 +23,14 @@ var Cookies = {
 };
 Cookies.init();
 
-Cookies.create("NNNAME", "VVAVAVVALUE", 4);
+var Preferences = {
+	init: function () {
+		if (!Cookies.sitePrefs) return;
+		sitePrefs = Cookies.sitePrefs.split(',,');
+		for (var i=0;i<sitePrefs.length;i++) {
+			var oneSitePref = sitePrefs[i].split(':');
+			this[oneSitePref[0]] = oneSitePref[1];
+		}	
+	}
+};
+Preferences.init();

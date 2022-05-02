@@ -153,15 +153,15 @@ function dimmingBlocks() {
         let x = Math.floor(id / rawNum);
         let y = id % rawNum;
 
-        if (id == answerBlockId){
+        if (id == answerBlockId) {
             continue
         }
-        if(y==Ay){
-            if(x+1 == Ax || x-1==Ax)
+        if (y == Ay) {
+            if (x + 1 == Ax || x - 1 == Ax)
                 continue;
         }
-        if(x==Ax){
-            if(y+1 == Ay || y-1==Ay)
+        if (x == Ax) {
+            if (y + 1 == Ay || y - 1 == Ay)
                 continue;
         }
         allBlocks[id].classList.toggle('fade');
@@ -170,18 +170,27 @@ function dimmingBlocks() {
     return toggledIds;
 }
 
-function restartBtnClick(){
+function restartBtnClick() {
     let btn = document.getElementById("restartBtnBox");
     btn.style.visibility = "hidden";
 
-    //* initiate everything
+    //* record high score
+    let highest = score;
+    if(Cookies['HIGH_SCORE'] !== undefined){
+        highest = Math.max(+Cookies['HIGH_SCORE'], score);
+    }
+    console.log(highest)
+    Cookies.create("HIGH_SCORE", "" + highest, 30);
+    readHighScore();
 
+    //* initiate everything
     blockNumber = 4;
     scaleNumber = 40;
     level = 0;
     score = 0;
     answerBlockId = null;
     loss = false;
+
     // * set visible
     // for(let i=0; i<blockNumber; i++){
     //     allBlocks[i].style.display = "block";
@@ -189,14 +198,14 @@ function restartBtnClick(){
     //     allBlocks[i].classList.toggle("fade");
     // }
     //* set display => none
-    for(let i=4; i<allBlocks.length; i++){
+    for (let i = 4; i < allBlocks.length; i++) {
         allBlocks[i].style.display = "none";
-        if(allBlocks[i].style.display == "block"){
+        if (allBlocks[i].style.display == "block") {
             allBlocks[i].style.display = "none";
         }
     }
     //* reverse not faded blocks => into not faded
-    fadedBlockIds.forEach((e)=>{
+    fadedBlockIds.forEach((e) => {
         allBlocks[e].classList.toggle('fade');
     });
     visiblizeBlockNumber(blockNumber);
@@ -204,4 +213,12 @@ function restartBtnClick(){
     refresh();
 }
 
+function readHighScore() {
+    if(Cookies['HIGH_SCORE'])
+        document.getElementById("highScore").innerHTML = "High Score: " + Cookies['HIGH_SCORE'];
+    else
+        document.getElementById("highScore").innerHTML = "High Score: 0";
+}
+
 onStartInit();
+readHighScore();
