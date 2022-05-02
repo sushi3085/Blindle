@@ -15,10 +15,12 @@ Let's go!
 ## How to Play?
 
 As long as you are not, probably not, a <u>GSCB</u>, also known as **g**ray-**s**cale **c**olor **b**lind.  
-You can play this game well. At least in the beginning.
+You can play this game well. At least in the beginning.  
+
+[Game Link HERE](https://sushi3085.github.io/Blindle/)
 
 ## Upcoming (probably)
 
-- [ ] "pick your own background color" feature
-- [ ] leader board
-- [ ] add url to the game
+- [o] "pick your own background color" feature
+- [o] leader board
+- [o] add url to the game
