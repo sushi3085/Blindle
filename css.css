@@ -83,3 +83,23 @@ span{
     position: relative;
     top: 25%;
 }
+
+#colors{
+    position: fixed;
+    display: flex;
+    align-content: flex-start;
+    width: 150px;
+    height: 20px;
+}
+
+.colorPicker{
+    background-color: white;
+
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+
+    border-radius: 2px 2px 2px 2px;
+
+    border: solid 1px rgb(199, 199, 199);
+}
