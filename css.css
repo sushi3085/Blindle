@@ -68,3 +68,18 @@ span{
     flex: none;
     margin: auto;
 }
+
+#restartBtn{
+    font-size: 15px;
+    margin: auto;
+}
+#restartBtnBox{
+    text-align: center;
+    color: yellow;
+    
+    flex: none;
+    margin: auto;
+
+    position: relative;
+    top: 25%;
+}

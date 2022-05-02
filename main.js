@@ -6,6 +6,7 @@ var answerBlockId = null;
 const MAX_VALUE = 255;
 var level = 0;
 var loss = false;
+var fadedBlockIds = [];
 
 var allBlocks = document.getElementsByClassName("block");
 
@@ -41,6 +42,7 @@ function visiblizeBlockNumber(n) {
         allBlocks[i].style.display = "block";
         allBlocks[i].style.width = width + "px";
         allBlocks[i].style.height = width + "px";
+        // allBlocks[i].style.opacity = "1";
     }
 }
 
@@ -52,7 +54,9 @@ function getBlockWidth(rowBlockNumber) {
 }
 
 // * main function
-async function clicked(blockId) {
+function clicked(blockId) {
+    if (loss) return true;
+
     if (blockId == answerBlockId && !loss) {
         //* for clearing the welcome words
         if (score === 0) {
@@ -66,9 +70,10 @@ async function clicked(blockId) {
 
         //* you won the game!
         if (score === 80) {
-            // TODO
             alert("you cleared all stages!");
             alert("C O N L A D U G R A T I O N S");
+            // TODO : show restart btn;
+            document.getElementById("restartBtnBox").style.visibility = "visible";
             return true;
         }
 
@@ -77,7 +82,6 @@ async function clicked(blockId) {
             console.log("level now : " + level);
 
             //* response visible blocks to the correspond level
-            // TODO
             switch (level) {
                 case 2:
                     blockNumber = 9;
@@ -94,20 +98,18 @@ async function clicked(blockId) {
             }
         }
 
+        score++;
         refresh();
         return true;
     }
     //* wrong answer
     else {
-        // TODO : add animation, show correct answer, etc.
-        // TODO DONE
-        if (loss) return true;
-        await dimmingBlocks();
-        setTimeout(()=>{
-            alert("this can be practiced, \nnext round will be better.\n\nREFRESH THIS PAGE TO START NEXT ROUND");
-        }, 1000);
-        // alert("this can be practiced, \nnext round will be better.\n\nREFRESH THIS PAGE TO START NEXT ROUND");
+        // if (loss) return true;
+        fadedBlockIds = dimmingBlocks();
         loss = true;
+
+        // TODO : jump out restart windows
+        document.getElementById("restartBtnBox").style.visibility = "visible";
     }
 }
 
@@ -123,7 +125,7 @@ function refresh() {
     answerBlockId = rand;
 
     //! add score, show score
-    score++;
+    // score++;
     document.getElementById("score").innerHTML = "" + score;
 }
 
@@ -145,6 +147,8 @@ function dimmingBlocks() {
     let Ax = Math.floor(answerBlockId / rawNum);
     let Ay = answerBlockId % rawNum;
 
+    let toggledIds = [];
+
     for (let id = 0; id < blockNumber; id++) {
         let x = Math.floor(id / rawNum);
         let y = id % rawNum;
@@ -161,7 +165,43 @@ function dimmingBlocks() {
                 continue;
         }
         allBlocks[id].classList.toggle('fade');
+        toggledIds.push(id);
     }
+    return toggledIds;
+}
+
+function restartBtnClick(){
+    let btn = document.getElementById("restartBtnBox");
+    btn.style.visibility = "hidden";
+
+    //* initiate everything
+
+    blockNumber = 4;
+    scaleNumber = 40;
+    level = 0;
+    score = 0;
+    answerBlockId = null;
+    loss = false;
+    // * set visible
+    // for(let i=0; i<blockNumber; i++){
+    //     allBlocks[i].style.display = "block";
+    //     // allBlocks[i].style.opacity = "1";
+    //     allBlocks[i].classList.toggle("fade");
+    // }
+    //* set display => none
+    for(let i=4; i<allBlocks.length; i++){
+        allBlocks[i].style.display = "none";
+        if(allBlocks[i].style.display == "block"){
+            allBlocks[i].style.display = "none";
+        }
+    }
+    //* reverse not faded blocks => into not faded
+    fadedBlockIds.forEach((e)=>{
+        allBlocks[e].classList.toggle('fade');
+    });
+    visiblizeBlockNumber(blockNumber);
+    document.getElementById("score").innerHTML = "0";
+    refresh();
 }
 
 onStartInit();
